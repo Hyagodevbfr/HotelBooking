@@ -7,15 +7,17 @@ namespace HotelBooking.Domain.Entities
     public class BaseEntity
     {
         [BsonId]
-        [BsonRepresentation(MongoDB.Bson.BsonType.ObjectId)]
-        public string Id { get; private set; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; private set; } = string.Empty;
 
         [BsonElement("PublicId")]
-        public string PublicId { get; private set; }
+        public string PublicId { get; private set; } = string.Empty;
 
-        protected BaseEntity()
+        protected BaseEntity(){}
+
+        public void GenerateIdsIfNeeded()
         {
-            Id = ObjectId.GenerateNewId().ToString();
+            Id ??= ObjectId.GenerateNewId().ToString();
             PublicId = Nanoid.Generate(size: 21);
         }
     }
