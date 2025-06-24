@@ -51,5 +51,11 @@ namespace HotelBooking.Domain.Entities
             IsActive = isActive;
             EmailChecked = emailChecked;
         }
+
+        public void Inactive()
+        {
+            LastName += " - Excluído";
+            IsActive = false;
+        }
     }
 }
