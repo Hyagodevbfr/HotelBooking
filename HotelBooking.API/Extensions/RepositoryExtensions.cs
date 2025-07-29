@@ -8,6 +8,7 @@ namespace HotelBooking.API.Extensions
         public static IServiceCollection AddRepositories(this IServiceCollection services)
         {
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IRoomRepository, RoomRepository>();
 
             return services;
         }
