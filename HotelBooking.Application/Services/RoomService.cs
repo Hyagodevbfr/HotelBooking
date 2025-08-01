@@ -63,10 +63,8 @@ public class RoomService : IBaseService<RoomResponseDto, RoomRegisterDto, RoomUp
         return rooms.Select(room => room.ToResponse()).ToList();
     }
 
-    public async Task<List<RoomResponseDto>> GetRoomsByCapacityAsync(int capacity)
+    public Task<List<RoomResponseDto>> GetRoomsByCapacityAsync(int capacity)
     {
-        var rooms = await _roomRepository.GetRoomsByCapacityAsync(capacity);
-        
-        return rooms.Select(room => room.ToResponse()).ToList();
+        throw new NotImplementedException();
     }
 }

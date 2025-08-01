@@ -6,5 +6,4 @@ public interface IRoomService : IBaseService<RoomResponseDto, RoomRegisterDto, R
 {
     Task<List<RoomResponseDto>> GetAllRoomsAsync();
     Task<List<RoomResponseDto>> GetAllRoomsActivatedAsync();
-    Task<List<RoomResponseDto>> GetRoomsByCapacityAsync(int capacity);
 }
