@@ -13,7 +13,7 @@ public class RoomRepository : BaseRepository<Room>, IRoomRepository
     {
         var mongoClient = new MongoClient(services.Value.ConnectionString);
         var mongoDatabase = mongoClient.GetDatabase(services.Value.DatabaseName);
-        _mongoContext = mongoDatabase.GetCollection<Room>(typeof(Room).Name);
+        _mongoContext = mongoDatabase.GetCollection<Room>(nameof(Room));
     }
 
     public async Task<List<Room>> GetAllRoomsAsync()
@@ -23,13 +23,12 @@ public class RoomRepository : BaseRepository<Room>, IRoomRepository
         return result.ToList();
     }
 
-    public Task<List<Room>> GetAllRoomsActivatedAsync()
+    public async Task<List<Room>> GetAllRoomsActivatedAsync()
     {
-        throw new NotImplementedException();
-    }
-
-    public Task<List<Room>> GetRoomsByCapacityAsync(int capacity)
-    {
-        throw new NotImplementedException();
+        var filter = Builders<Room>.Filter.Eq(room => room.IsAvailable, true);
+        
+        var result = await _mongoContext.FindAsync<Room>(filter);
+        
+        return result.ToList();
     }
 }
