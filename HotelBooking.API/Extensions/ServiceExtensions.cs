@@ -11,6 +11,8 @@ namespace HotelBooking.API.Extensions
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IUserPasswordHasher, UserPasswordHasherService>();
             services.AddScoped<IRoomService, RoomService>();
+            services.AddScoped<IClientService, ClientService>();
+
             return services;
         }
     }
