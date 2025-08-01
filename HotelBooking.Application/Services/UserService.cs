@@ -131,5 +131,19 @@ namespace HotelBooking.Application.Services
             var users = await _userRepository.GetAllActive();
             return users.Select(user => user.ToResponse()).ToList();
         }
+
+        // Client methods
+
+        public async Task<IEnumerable<UserResponseDto>> GetAllClients()
+        {
+            var clients = await _userRepository.GetAllClients();
+            return clients.Select(client => client.ToResponse()).ToList();
+        }
+
+        public async Task<IEnumerable<UserResponseDto>> GetAllActivatedClients()
+        {
+            var clients = await _userRepository.GetAllActivatedClients();
+            return clients.Select(client => client.ToResponse()).ToList();
+        }
     }
 }

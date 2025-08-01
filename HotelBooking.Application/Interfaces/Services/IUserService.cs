@@ -10,5 +10,9 @@ namespace HotelBooking.Application.Interfaces.Services
         Task<IEnumerable<UserResponseDto>> GetAllActive();
         Task<AuthResponse> Login(UserLoginDto userLogin);
         Task<UserResponseDto> Inactive(string publicId);
+
+        // Client methods
+        Task<IEnumerable<UserResponseDto>> GetAllClients();
+        Task<IEnumerable<UserResponseDto>> GetAllActivatedClients();
     }
 }
