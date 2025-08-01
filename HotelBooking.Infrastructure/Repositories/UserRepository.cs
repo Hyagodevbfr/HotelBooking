@@ -1,4 +1,5 @@
 ﻿using HotelBooking.Domain.Entities;
+using HotelBooking.Domain.Enums;
 using HotelBooking.Domain.Interfaces.Repositories;
 using HotelBooking.SharedKernel.Settings;
 using Microsoft.Extensions.Options;
@@ -47,6 +48,27 @@ namespace HotelBooking.Infrastructure.Repositories
             await Update(user);
 
             return user;
+        }
+
+        // Clients methods
+        public async Task<IEnumerable<User>> GetAllActivatedClients()
+        {
+            var filter = Builders<User>.Filter.And(
+                Builders<User>.Filter.Eq(u => u.UserLevel, UserLevel.Client),
+                Builders<User>.Filter.Eq(u => u.IsActive, true)
+            );
+            var clients = await _mongoContext.Find(filter).ToListAsync();
+
+            return clients;
+        }
+
+        public async Task<IEnumerable<User>> GetAllClients()
+        {
+            var filter = Builders<User>.Filter.Eq(u => u.UserLevel, UserLevel.Client);
+
+            var clients = await _mongoContext.Find(filter).ToListAsync();
+
+            return clients;
         }
     }
 }

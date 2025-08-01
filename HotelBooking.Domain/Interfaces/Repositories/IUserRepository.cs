@@ -8,5 +8,10 @@ namespace HotelBooking.Domain.Interfaces.Repositories
         Task<User> GetByCpfAsync(string cpf);
         Task<IEnumerable<User>> GetAllActive();
         Task<User> Inactive(User user);
+
+        // Client methods
+        Task<IEnumerable<User>> GetAllClients();
+        Task<IEnumerable<User>> GetAllActivatedClients();
+        
     }
 }
