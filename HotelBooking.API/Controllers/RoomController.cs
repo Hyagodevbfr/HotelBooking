@@ -17,7 +17,7 @@ namespace HotelBooking.API.Controllers
         }
 
         [HttpPost("Register")]
-        public async Task<ActionResult<ResponseView<RoomResponseDto>>> Register( [FromBody] RoomRegisterDto registerDto)
+        public async Task<ActionResult<ResponseView<RoomResponseDto>>> Register([FromBody] RoomRegisterDto registerDto)
         {
             return Ok(
                 new ResponseView<RoomResponseDto>(
@@ -48,6 +48,40 @@ namespace HotelBooking.API.Controllers
                     true,
                     "Rooms retrieved successfully",
                     await _roomService.GetAllRoomsActivatedAsync()
+                )
+            );
+        }
+
+        [HttpGet("GetByPublicId/{publicId}")]
+        public async Task<ActionResult<ResponseView<RoomResponseDto>>> GetByPublicId(string publicId)
+        {
+            return Ok(
+                new ResponseView<RoomResponseDto>(
+                    true,
+                     "Room retrieved successfully",
+                      await _roomService.GetByPublicId(publicId)
+                )
+            );
+        }
+        [HttpPatch]
+        public async Task<ActionResult<ResponseView<RoomResponseDto>>> Update([FromBody] RoomUpdateDto updateDto)
+        {
+            return Ok(
+                new ResponseView<RoomResponseDto>(
+                    true,
+                    "Room updated successfully",
+                    await _roomService.Update(updateDto)
+                )
+            );
+        }
+        [HttpDelete("{publicId}")]
+        public async Task<ActionResult<ResponseView<string>>> Delete(string publicId)
+        {
+            await _roomService.Delete(publicId);
+            return Ok(
+                new ResponseView<string>(
+                    true,
+                    "Room deleted successfully"
                 )
             );
         }
