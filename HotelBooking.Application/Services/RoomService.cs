@@ -40,7 +40,15 @@ public class RoomService : IBaseService<RoomResponseDto, RoomRegisterDto, RoomUp
         if (room is null)
             throw new ArgumentException("Room not found.");
 
-        room.ToUpdate();
+        room.Update(
+            updateDto.Name,
+            updateDto.Description,
+            updateDto.Capacity,
+            updateDto.Quantity,
+            updateDto.PricePerNight,
+            updateDto.IsAvailable
+        );
+        
         await _roomRepository.Update(room);
 
         return room.ToResponse();
@@ -61,10 +69,5 @@ public class RoomService : IBaseService<RoomResponseDto, RoomRegisterDto, RoomUp
     {
         var rooms = await _roomRepository.GetAllRoomsActivatedAsync();
         return rooms.Select(room => room.ToResponse()).ToList();
-    }
-
-    public Task<List<RoomResponseDto>> GetRoomsByCapacityAsync(int capacity)
-    {
-        throw new NotImplementedException();
     }
 }
