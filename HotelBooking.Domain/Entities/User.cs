@@ -52,6 +52,17 @@ namespace HotelBooking.Domain.Entities
             EmailChecked = emailChecked;
         }
 
+        public void Update(string firstName, string lastName, string email, string phoneNumber, string cpf, DateTime dateOfBirth, UserLevel userLevel)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            Email = email;
+            PhoneNumber = phoneNumber;
+            Cpf = cpf;
+            DateOfBirth = dateOfBirth;
+            UserLevel = userLevel;
+        }
+
         public void Inactive()
         {
             LastName += " - Excluído";
