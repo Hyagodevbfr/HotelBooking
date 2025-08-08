@@ -5,6 +5,7 @@ public record RoomUpdateDto(
     string Name,
     string Description,
     int Capacity,
+    int Quantity,
     double PricePerNight,
     bool IsAvailable
     );
