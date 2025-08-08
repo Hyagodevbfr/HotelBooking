@@ -69,7 +69,15 @@ namespace HotelBooking.Application.Services
             if (user is null)
                 throw new ArgumentException("User not found.");
 
-            user.ToUpdate();
+            user.Update(
+                updateDto.FirstName,
+                updateDto.LastName,
+                updateDto.Email,
+                updateDto.PhoneNumber,
+                updateDto.Cpf,
+                updateDto.DateOfBirth ?? user.DateOfBirth,
+                updateDto.UserLevel ?? user.UserLevel
+            );
             await _userRepository.Update(user);
 
             return user.ToResponse();
